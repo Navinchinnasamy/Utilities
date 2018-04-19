@@ -1,125 +1,18 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 	<head>
-		<title>SMS</title>
-		<meta name="author" content="Navin Chinnasamy">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
-		<style>
-			input, button, textarea {
-				border: 1px solid lavender;
-				border-radius: 5px;
-				padding: 5px;
-				display: block;
-				margin: 5px;
-			}
-			textarea {
-				width: -webkit-fill-available;
-				height: 90px;
-			}
-			#content {
-				margin: 11% auto;
-				width: fit-content;
-				border: 1px solid greenyellow;
-				border-radius: 10px;
-				padding: 2%;
-			}
-			
-			.button {
-			  position: relative;
-			  font-weight: unset;
-			  padding: 10px 15px;
-			  font-size: 14px;
-			  text-align: center;
-			  cursor: pointer;
-			  outline: none;
-			  color: #fff;
-			  background-color: #4CAF50;
-			  border: none;
-			  border-radius: 10px;
-			  box-shadow: 0 5px #999;
-			}
-			.button:hover {
-			  background-color: #3e8e41
-			}
-			.button:active {
-			  font-weight: bold;
-			  background-color: #3e8e41;
-			  box-shadow: 0 2px #666;
-			  transform: translateY(4px);
-			}
-			
-			.button span {
-			  cursor: pointer;
-			  display: inline-block;
-			  position: relative;
-			  transition: 0.5s;
-			}
-
-			.button span:after {
-			  content: '\00bb';
-			  position: absolute;
-			  opacity: 0;
-			  top: 0;
-			  right: -10px;
-			  transition: 0.5s;
-			}
-
-			.button:hover span {
-			  padding-right: 15px;
-			}
-
-			.button:hover span:after {
-			  opacity: 1;
-			  right: 0;
-			}
-		</style>
-		<script type="text/javascript">
-			$(function(){
-				$("body").on("click", "#ping", function(){
-					var mobile = $("#mobile").val(), message = $("#message").val();
-					if(mobile.trim() == '' || message.trim() == ''){
-						return false;
-					}
-					
-					message = urlencode(message);
-					var url = "sendsms.php";
-					var data = {
-						"uid": "8012289528",
-						"pwd": "navin21594",
-						"phone": mobile,
-						"msg": message
-					};
-					$.post(url, data, function(ret, status){
-						alert(ret+' |-| '+status);
-					});
-				});
-			});
-			
-			function urlencode(str) {
-				str = (str + '').toString();
-				return encodeURIComponent(str)
-					.replace(/!/g, '%21')
-					.replace(/'/g, '%27')
-					.replace(/\(/g, '%28')
-					.replace(/\)/g, '%29')
-					.replace(/\*/g, '%2A')
-					.replace(/%20/g, '+');
-			}
-		</script>
+		<meta name="author" description="Navinchinnasamy">
+		<meta name="viewport" description="width=device-width, initial-scale=1.0">
+		<title>MyAnguar</title>
+		<script type="text/javascript" src="js/angular.min.js"></script>
+		<script type="text/javascript" src="js/angular-route.js"></script>
+		<script type="text/javascript" src="js/app.js"></script>
 	</head>
-	<body>
-		<div id="content">
-			<input type="text" id="mobile" list="moblist" placeholder="Mobile.." />
-			<datalist id="moblist">
-				<option value="8012289528">Self</option>
-				<option value="7373305158">Karthi</option>
-				<option value="9626417075">Samyukta</option>
-				<option value="8122540840">Priyanka</option>
-				<option value="7299461553">Donald</option>
-			</datalist>
-			<textarea id="message" row="5" placeholder="Text to be sent.."></textarea>
-			<button id="ping" class="button" type="button"><span>Ping!</span></button>
-		</div>
+	<body ng-app="angApp">
+		<p>Click on the links to change the page content</p>
+		<div ng-view></div>
+		<!-- Either one can be used
+		<ng-view></ng-view>
+		<div class="ng-view"></div> -->
 	</body>
 </html>

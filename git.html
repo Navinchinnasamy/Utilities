@@ -1,0 +1,10 @@
+<p><a href="#!">Home</a></p>
+
+<p>Username: <input type="text" ng-blur="checkGit()" ng-model="gitusername"></p>
+<img ng-src="{{gitresult.avatar_url}}" style="width: 10%; border-radius: 30%;" />
+<p>Repositories: {{gitresult.public_repos}}</p>
+<p>Followers: {{gitresult.followers}}</p>
+<p>Following: {{gitresult.following}}</p>
+<p>Gists: {{gitresult.public_gists}}</p>
+<p>Location: {{gitresult.location}}</p>
+<p>Joined: <span ng-bind="gitresult.created_at | date:'dd MMMM yyyy hh:mm a'"></span></p>

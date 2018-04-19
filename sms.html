@@ -1,0 +1,35 @@
+<p><a href="#!">Home</a></p>
+
+<style>
+	input, textarea {
+		border: 1px solid lavender;
+		border-radius: 5px;
+		padding: 5px;
+		display: block;
+		margin: 5px;
+	}
+	textarea {
+		width: -webkit-fill-available;
+		height: 90px;
+	}
+	#content {
+		margin: 11% auto;
+		width: fit-content;
+		border: 1px solid greenyellow;
+		border-radius: 10px;
+		padding: 2%;
+	}
+</style>
+<div id="content" ng-controller="SmsController">
+	<input type="text" ng-model="mobile" ng-blur="createUrl()" list="moblist" placeholder="Mobile.." />
+	<datalist id="moblist">
+		<option value="8012289528">Self</option>
+		<option value="7373305158">Karthi</option>
+		<option value="9626417075">Samyukta</option>
+		<option value="8122540840">Priyanka</option>
+		<option value="7299461553">Donald</option>
+	</datalist>
+	<textarea ng-model="message" rows="5" ng-keypress="countChars($event)" ng-blur="createUrl()" placeholder="Message to be sent.." > </textarea>
+	<p style="font-size:8pt;">{{typed}} / {{total}}</p>
+	<a ng-href="{{smsurl}}" title="{{smsurl}}" target="_blank">Send</a>
+</div>
