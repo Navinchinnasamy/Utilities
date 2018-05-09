@@ -8,7 +8,7 @@ class Git {
 			"status" => "git status",
 			"remote" => "git remote -v",
 			"branch" => "git branch",
-			"diff" => "git diff",
+			"diff" => "git diff --name-only",
 			"log" => "git log"
 		);
 		if(stripos(php_uname(), "windows") != -1){
