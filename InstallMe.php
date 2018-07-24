@@ -41,6 +41,9 @@ class InstallMe {
 ?>
 
 <style>
+body {
+	background-color: floralwhite;
+}
 .success {
 	color: green;
 }
@@ -49,6 +52,52 @@ class InstallMe {
 }
 .extn {
 	color: blue;
+}
+#next {
+	padding: 7px;
+    border-radius: 5px;
+    border: 1px solid #24a530;
+    background-color: #008000bf;
+    color: white;
+    font-weight: bold;
+    margin-right: 20px;
+	margin-bottom: 10px;
+	margin-left: 84%;
+}
+h3 {
+	background-color: blueviolet;
+	color: azure;
+	border-radius: 5px 5px 0px 0px;
+	text-align: center;
+	margin: auto;
+	padding: 5px;
+}
+.results {
+	width: 50%;
+    margin: auto;
+    border-radius: 10px;
+    background-color: white;
+    border: 1px solid blueviolet;
+}
+.reqirements {
+	margin-left: 20px;
+}
+#requirement-table {
+	width: 100%;
+    padding: 5px;
+    margin-bottom: 10px;
+}
+.textbox {
+	padding: 5px;
+	border: 1px solid #a9a9a9;
+	border-radius: 5px;
+}
+label {
+	font-weight: bold;
+	padding-right: 10px;
+}
+.form-elements {
+	margin-top: 10px;
 }
 </style>
 <?php
@@ -67,20 +116,54 @@ $requirements = array(
 		)
 	);
 	
-$i = new InstallMe;
+$i = new InstallMe();
+$fail_count = 0;
 
+echo "<div class='results'>";
+echo "<h3>Software Requirements</h3>";
+echo "<div class='reqirements'>";
+echo "<table id='requirement-table'><thead><tr><th>Requirement</th><th>Status</th></tr></thead><tbody>";
 if($i->getPhpVersion() >= $requirements['php_version']){
-	echo "<p class='success'>PHP version <b class='extn'>".$i->getPhpVersion()."</b> installed and required <b>{$requirements['php_version']}</b></p>";
+	echo "<tr><td>PHP version <b class='extn'>{$requirements['php_version']}</b> is required.</td><td> <b class='success'>Installed ".$i->getPhpVersion()."</b> </td></tr>";
 } else {
-	echo "<p class='error'>PHP version <b class='extn'>".$i->getPhpVersion()."</b> installed and required <b>{$requirements['php_version']}</b></p>";
+	$fail_count++;
+	echo "<tr><td>PHP version <b class='extn'>{$requirements['php_version']}</b> is required.</td><td><b class='error'>Installed  ".$i->getPhpVersion()."</b> </td></tr>";
 }
 
 foreach($requirements['extensions'] as $ext){
 	if($i->checkExtensionEnabled($ext)){
-		echo "<p class='success'>PHP extension <b class='extn'>".$ext."</b> installed / enabled</p>";
+		echo "<tr><td>PHP extension <b class='extn'>".$ext."</b> should be installed & enabled</td><td><b class='success'>Installed & Enabled</b></td>";
 	} else {
-		echo "<p class='error'>PHP extension <b class='extn'>".$ext."</b> not installed / enabled</p>";
+		$fail_count++;
+		echo "<tr><td>PHP extension <b class='extn'>".$ext."</b> should be installed & enabled</td><td><b class='error'>Not Installed or Enabled</b></td>";
 	}
 }
+echo "</tbody></table>";
 
+echo "</div>";
+if($fail_count != 0){
+	echo "<button type='button' id='next'>Next Step</button>";
+}
+echo "</div>";
 ?>
+
+<div id="database-credentials" style="display: none;">
+	<form id="dbcreds" method="post">
+		<div class="form-elements">
+			<label for="db_user">Database Username</label>
+			<input id="db_user" name="db[user]" type="text" class="textbox" placeholder="Database Username.." />
+		</div>
+		<div class="form-elements">
+			<label for="db_pass">Database Password</label>
+			<input id="db_pass" name="db[pass]" type="text" class="textbox" placeholder="Database Password.." />
+		</div>
+		<div class="form-elements">
+			<label for="db_name">Database Password</label>
+			<input id="db_name" name="db[name]" type="text" class="textbox" placeholder="Database Name.." />
+		</div>
+	</form>
+</div>
+
+<script>
+
+</script>
