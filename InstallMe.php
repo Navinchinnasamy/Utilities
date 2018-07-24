@@ -141,7 +141,7 @@ foreach($requirements['extensions'] as $ext){
 echo "</tbody></table>";
 
 echo "</div>";
-if($fail_count != 0){
+if($fail_count == 0){
 	echo "<button type='button' id='next'>Next Step</button>";
 }
 echo "</div>";
@@ -164,6 +164,18 @@ echo "</div>";
 	</form>
 </div>
 
+<script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
 <script>
-
+	$("body").on("click", "#next", function(){
+		$(".reqirements").html($("#database-credentials").html());
+		$("h3").html("Database Credentials");
+		$("#next").attr('id', 'checkdb').text('Check Database');
+	});
+	
+	$("body").on("click", "#checkdb", function(){
+		
+	});
 </script>
